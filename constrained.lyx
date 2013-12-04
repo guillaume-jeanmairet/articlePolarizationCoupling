@@ -1,0 +1,531 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass revtex4-1
+\options aps,prl,preprint
+\use_default_options false
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+An exact expansion at quadratic order around the HRF of a free energy functional
+ for MDFT 
+\end_layout
+
+\begin_layout Author
+Maximilien Levesque
+\end_layout
+
+\begin_layout Author Email
+
+Joe.Dassin@hotmail.com
+\end_layout
+
+\begin_layout Affiliation
+Princeton
+\end_layout
+
+\begin_layout Author
+Guillaume Jeanmairet
+\end_layout
+
+\begin_layout Affiliation
+CEA DAM
+\end_layout
+
+\begin_layout Author
+Daniel Borgis
+\end_layout
+
+\begin_layout Affiliation
+École Normale Supérieure, Département de Chimie, UMR 8640 CNRS-ENS-UPMC,
+ 24 rue Lhomond, 75005 Paris, France
+\end_layout
+
+\begin_layout Abstract
+We show that we can construct a molecular DFT by doing a second order expansion
+ around an homogeneous reference fluid.
+ This functional depends of the one particle solvent density and of the
+ polarization.
+ For computational and physical reason we restrict this expansion at the
+ second order.
+ We present here to possible devellopements which differs by the degree
+ of desciption of the polarization field.
+ In the first case we consider only the restriction at the dipolar order
+ of the polarizarion whereas in the second case we consider all the multipolar
+ order of the Polarization field.
+\end_layout
+
+\begin_layout Section
+Introduction
+\end_layout
+
+\begin_layout Section
+Theory
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Theoretical-developments"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+General considerations
+\end_layout
+
+\begin_layout Standard
+The solvent molecules are rigids and the density is considered as depending
+ of the position 
+\begin_inset Formula $\bm{r}$
+\end_inset
+
+ and the orientation 
+\begin_inset Formula $\bm{\Omega}$
+\end_inset
+
+ (in term of three Euler angles (
+\begin_inset Formula $\theta,\phi,\psi$
+\end_inset
+
+).
+ It can be shown that for a given external potential 
+\begin_inset Formula $V_{ext}$
+\end_inset
+
+ , the Helmoltz free energy can be written as an unique exact functional
+ of the solvent density, 
+\begin_inset Formula ${\cal F}[\rho(\bm{r,\Omega})]$
+\end_inset
+
+.
+ This functional can be split into three terms:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+{\cal F}[\rho]={\cal F}_{id}[\rho]+{\cal F}_{ext}[\rho]+{\cal F}_{exc}[\rho].\label{eq:F_decomp}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The first term is the ideal term, of the ideal fluid, and it can be computed
+ using the following expression
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+{\cal F}_{id}[\rho]=k_{B}T\int\int\left[\rho(\bm{r},\Omega)\ln(\frac{8\pi^{2}\rho(\bm{r},\Omega)}{n_{0}})-\rho(\bm{r},\Omega)+\frac{n_{0}}{8\pi^{2}}\right]d\bm{r}d\Omega.\label{eq:F_id}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Where 
+\begin_inset Formula $k_{B}T$
+\end_inset
+
+ is the thermal energy, and 
+\begin_inset Formula $n_{0}$
+\end_inset
+
+ is the homogeneous pure fluid density.
+ The second term is the external one, it is due to interaction with the
+ external potential, in this publication this term is due to the solute.
+ It can be evaluated with the following expression, for any solute that
+ is represented by an atomistic forcefield which create an external potential
+ 
+\begin_inset Formula $V_{ext}$
+\end_inset
+
+,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+{\cal F}_{ext}[\rho]=k_{B}T\int\int\left[\rho(\bm{r},\Omega)V_{ext}(\bm{r},\Omega)\right]d\bm{r}d\Omega.\label{eq:F_ext}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The third term is the complicated one, it is the excess term and is due
+ to solvent-solvent interactions.
+ In the homogeneous reference fluid approximation (HRF), we write the excess
+ term as depending of the exact direct correlation function of the pure
+ solvent.
+ That approximation consist in making the hypothesis that the solvent, in
+ the presence of the perturbation of the solute, possess the same correlation
+ function,
+\begin_inset Formula $c(|\bm{r-r'}|,\Omega,\Omega')$
+\end_inset
+
+ than the homogeneous solvent.
+ Under this approximation the excess term can be written:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+{\cal F}_{exc}[\rho]=-\frac{1}{2}k_{B}T\int\int\Delta\rho(\bm{r},\Omega)c(|\bm{r-r'}|,\Omega,\Omega')\Delta\rho(\bm{r},\Omega)d\bm{r}d\bm{r'}d\Omega d\Omega'+{\cal F}_{B}[\rho],\label{eq:F_exc}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $\Delta\rho(\bm{r},\Omega)=\rho(\bm{r},\Omega)-n_{0}$
+\end_inset
+
+.
+ 
+\begin_inset Formula ${\cal F}[\rho]$
+\end_inset
+
+ is the correction to that approximation, i.e it is defined as the difference
+ between the the exact value of the excess part and the first term.
+ Physically it is the correction to that approximation and it can be expressed
+ as an expansion of the solvent correlations depending on the multibody
+ correlation functions.
+ Some approximations of the 
+\begin_inset Quotes eld
+\end_inset
+
+bridge functionnal
+\begin_inset Quotes erd
+\end_inset
+
+ had been given in previous publications, for the sake of clarity we will
+ suppose in this work that this term is null, which is a crude approximation.
+\end_layout
+
+\begin_layout Standard
+This expression was already implemented in previous publications.
+ In the next subsections we will present a re-writting of this excess term
+ as a functional of two simpler fields, the one particle solvent density
+ 
+\begin_inset Formula $n(\bm{r})$
+\end_inset
+
+ and the polarization field 
+\begin_inset Formula $\bm{P(r)}$
+\end_inset
+
+, instead of the total solvent density 
+\begin_inset Formula $\rho(\bm{r},\Omega)$
+\end_inset
+
+.
+ In a first part, we will consider a Polarization field limitated at the
+ dipolar order, the one generated by making the approximation that solvent
+ molecule can be represented by a pure dipole.
+ In a second part we will consider the multipolar polarization field, i.e
+ the one generated by a non-strictly dipolar charge distribution in the
+ solvent.
+\end_layout
+
+\begin_layout Subsection
+At Dipolar order
+\end_layout
+
+\begin_layout Standard
+In this part the Polarization field is defined as:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\bm{P(r)}=\mu_{0}\int\bm{\Omega}\rho(\bm{r},\Omega)d\Omega,\label{eq:Pola_dip}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Where 
+\begin_inset Formula $\bm{\Omega}$
+\end_inset
+
+ is the orientation vector of a water molecule, i.e it parallel to the 
+\begin_inset Formula $C_{2}$
+\end_inset
+
+ axis of the molecule and 
+\begin_inset Formula $\mu_{0}$
+\end_inset
+
+ is the value of the dipolar moment of a water molecule.
+ Note that such a definition is in facto an approximation, since we limit
+ the polarization field to its dipolar order.
+ To use the expression intruduced in 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:F_exc"
+
+\end_inset
+
+ we need to know the total direct correlation function 
+\begin_inset Formula $c(|\bm{r-r'}|,\Omega,\Omega')$
+\end_inset
+
+, we first do a systematic expansion of the this function on a basis of
+ rotational invariant:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+c({\mathbf{r}_{12}},\Omega_{1},\Omega_{2})=\sum_{lmn}c_{lmn}(r_{12})\,\Phi^{lmn}(\Omega_{1},\Omega_{2}).\label{eq:c_expansion}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+and we do an additional approximation, as we want to limit the polarization
+ field to its dipolar order, it seems rather reasonable to also limit the
+ expansion of the 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $c({\mathbf{r}_{12}},\Omega_{1},\Omega_{2})$
+\end_inset
+
+ at the dipolar order, i.e, with a rotational invariant expansion limited
+ to:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{eqnarray*}
+\Phi^{000} & = & 1\\
+\Phi^{101} & = & -\bm{\Omega}_{1}.\bm{\hat{r}}_{12}\\
+\Phi^{011} & = & \bm{\Omega}_{2}.\bm{\hat{r}}_{12}\\
+\Phi^{110} & = & \bm{\Omega}_{1}.\bm{\Omega}_{2}\\
+\Phi^{112} & = & 3(\bm{\Omega}_{1}.\bm{\hat{r}}_{12})(\bm{\Omega}_{2}.\bm{\hat{r}}_{12})-\bm{\Omega}_{1}.\bm{\Omega}_{2}
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{eqnarray*}
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Those invariants are defined in terms of the unitary intermolacular vector
+ 
+\begin_inset Formula $\bm{\hat{r}}_{12}=\bm{r}_{12}/r_{12}$
+\end_inset
+
+ and the unitary orientation vector for each molecule dipole 
+\begin_inset Formula $\bm{\Omega}_{i}$
+\end_inset
+
+ already defined, it is clear that they depend of the two first Euler angles
+ 
+\begin_inset Formula $\theta_{i}$
+\end_inset
+
+ and 
+\begin_inset Formula $\phi_{i}$
+\end_inset
+
+ but not of the angle describing the rotation around the 
+\begin_inset Formula $C_{2}$
+\end_inset
+
+ axis, 
+\begin_inset Formula $\psi_{i}$
+\end_inset
+
+ .
+\end_layout
+
+\begin_layout Standard
+By inserting this development on rotational invariant of the correlation
+ function in eqation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:F_exc"
+
+\end_inset
+
+ we get the following expression:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{eqnarray*}
+{\cal F}_{exc}[\rho] & = & -\frac{1}{2}\int\\
+\\
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+At Multipolar order
+\end_layout
+
+\begin_layout Section
+Applications
+\end_layout
+
+\begin_layout Subsection
+Work to create a cavity in a hard sphere fluid
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Work-to-create"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Exemple contrainte sur n pour créer une cavité
+\end_layout
+
+\begin_layout Subsection
+Impose the coordination to a hard sphere solute in water
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Impose-the-coordination"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Exemple contrainte sur P.
+\end_layout
+
+\begin_layout Section
+Conclusion
+\end_layout
+
+\begin_layout Standard
+We have shown how to build a constrained classical density functional theory
+ for molecular fluids.
+ The method is based on Lagrange multipliers and allows to impose constraints
+ on the 
+\emph on
+molecular
+\emph default
+ density in a given region of space.
+ While partitioning the electron density in real-space is a strong limitation
+ the ab
+\begin_inset space ~
+\end_inset
+
+initio CDFT, partitioning in real is the most most natural way in MDFT.
+ CMDFT allows one to study XXXXXXXXX.
+ The large amount of work devoted to electronic CDFT since the work of Dederich
+ et al.
+ promises a bright future to its classical little sister for the study of
+ non-equilibrium properties in the classical domain.
+\end_layout
+
+\begin_layout Acknowledgments
+ML acknowledges financial support from the Agence Nationale de la Recherche
+ under grant ANR-09-SYSC-012.
+\end_layout
+
+\end_body
+\end_document
